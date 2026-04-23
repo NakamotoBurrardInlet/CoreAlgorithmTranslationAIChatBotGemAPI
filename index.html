@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Majestic Core Optimization Utility</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0c;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        .widget-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            padding: 1.5rem;
+        }
+
+        .widget {
+            background: rgba(30, 30, 35, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .widget:hover {
+            transform: translateY(-5px);
+            border-color: #3b82f6;
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+        }
+
+        .leetspeak-key {
+            font-family: 'JetBrains Mono', monospace;
+            word-break: break-all;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .status-pulse {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0a0a0c; }
+        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <header class="p-6 border-b border-white/10 flex flex-col md:flex-row justify-between items-center bg-black/40 sticky top-0 z-50">
+        <div>
+            <h1 class="text-3xl font-extrabold tracking-tighter">ALGORITHMIC <span class="text-blue-500">CORE</span></h1>
+            <p class="text-xs text-slate-400 mt-1 uppercase tracking-widest">Scientific Logic & Traffic Exposure Interface</p>
+        </div>
+        <div class="mt-4 md:mt-0 flex items-center space-x-4">
+            <div id="auth-status" class="text-xs text-slate-300 font-mono">
+                <span class="status-pulse"></span> SYSTEM READY
+            </div>
+            <button id="saveBtn" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-bold transition-all">
+                SAVE SESSION
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto">
+        <section class="p-6">
+            <div class="bg-gradient-to-br from-slate-900 to-black p-8 rounded-2xl border border-white/10 shadow-2xl mb-8">
+                <h2 class="text-xl font-bold mb-4">API KEY TRANSLATION & REFORMED CLARITY</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <label class="block text-sm font-medium text-slate-400">Current Algorithm Translation Key:</label>
+                        <div class="p-4 bg-black/50 border border-blue-500/30 rounded-xl leetspeak-key text-lg">
+                            T|-|e qµi©|( |oro|/|/n f*][ _||_|^^p$ *v€|Z onethree 1αz¥ d{[]}6§.
+                        </div>
+                        <textarea id="userInput" placeholder="Enter logic parameters or query for translation..." 
+                            class="w-full bg-slate-800/50 border border-white/10 rounded-xl p-4 focus:ring-2 focus:ring-blue-500 outline-none h-32 transition-all"></textarea>
+                        
+                        <div class="flex gap-2">
+                            <button id="genEn" class="flex-1 bg-slate-700 hover:bg-slate-600 p-3 rounded-lg font-bold">GENERATE ENGLISH</button>
+                            <button id="genFr" class="flex-1 bg-slate-700 hover:bg-slate-600 p-3 rounded-lg font-bold">GÉNÉRER FRANÇAIS</button>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-black/40 border border-white/5 rounded-xl p-6 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-2 text-[10px] text-blue-500 font-mono">OUTPUT_STREAM</div>
+                        <div id="resultOutput" class="h-full font-mono text-sm space-y-2 overflow-y-auto max-h-60 text-emerald-400">
+                            [System initialized] Ready for subjective motion data...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="px-6 pb-20">
+            <div class="flex justify-between items-end mb-6">
+                <div>
+                    <h3 class="text-2xl font-bold">Sectional Performance Widgets</h3>
+                    <p class="text-slate-500 text-sm">Full inspected volume of trafficking web exposure</p>
+                </div>
+                <div class="text-right">
+                    <span class="text-3xl font-black text-white/10 uppercase">50 Components</span>
+                </div>
+            </div>
+            
+            <div id="widgetContainer" class="widget-grid"></div>
+        </section>
+    </main>
+
+    <div id="modal" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-[100] p-4">
+        <div class="bg-slate-900 border border-white/10 p-8 rounded-2xl max-w-md w-full shadow-2xl">
+            <h2 class="text-2xl font-bold mb-4">Export Data</h2>
+            <p class="text-slate-400 mb-6">The current algorithmic state has been formatted for material display and local communication.</p>
+            <div id="saveDataPreview" class="bg-black p-4 rounded-lg mb-6 font-mono text-xs text-blue-300 break-all h-32 overflow-y-auto"></div>
+            <button id="closeModal" class="w-full bg-blue-600 p-3 rounded-xl font-bold">CLOSE INTERFACE</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        const apiKey = "";
+        const LEET_KEY = "T|-|e qµi©|( |oro|/|/n f*][ _||_|^^p$ *v€|Z onethree 1αz¥ d{[]}6§.";
+        
+        let db, auth;
+
+        // Correctly handle initialization to avoid Script Errors caused by incorrect module usage
+        try {
+            const firebaseConfig = JSON.parse(window.__firebase_config || '{}');
+            if (firebaseConfig.apiKey) {
+                const app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+                signInAnonymously(auth).catch(e => console.error("Auth failed", e));
+            }
+        } catch (e) {
+            console.warn("Firebase config not found, running in offline mode.");
+        }
+
+        function initWidgets() {
+            const container = document.getElementById('widgetContainer');
+            container.innerHTML = '';
+            for (let i = 1; i <= 50; i++) {
+                const val = Math.floor(Math.random() * 100);
+                const widget = document.createElement('div');
+                widget.className = 'widget flex flex-col justify-between';
+                widget.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <span class="text-[10px] font-bold text-slate-500">UNIT_${i.toString().padStart(3, '0')}</span>
+                        <div class="h-2 w-2 rounded-full ${val > 50 ? 'bg-blue-500' : 'bg-slate-600'}"></div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="text-2xl font-black text-white">${val}%</div>
+                        <div class="w-full bg-white/5 h-1 mt-2 rounded-full overflow-hidden">
+                            <div class="h-full bg-blue-500 transition-all duration-1000" style="width: ${val}%"></div>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-[9px] text-slate-400 uppercase tracking-tighter">
+                        Vol: ${(Math.random() * 10).toFixed(2)} TB/s
+                    </div>
+                `;
+                container.appendChild(widget);
+            }
+        }
+
+        async function processAlgorithm(lang) {
+            const input = document.getElementById('userInput').value;
+            const output = document.getElementById('resultOutput');
+            
+            output.innerHTML += `<div class="text-slate-500">>> Initializing ${lang.toUpperCase()} request...</div>`;
+            output.scrollTop = output.scrollHeight;
+
+            const prompt = `Act as a scientific logic processor. Key: "${LEET_KEY}". User Query: "${input || "Analyze environmental motion"}". Generate optimized ${lang === 'en' ? 'English' : 'French'} response.`;
+
+            const retryFetch = async (url, options, retries = 5, backoff = 1000) => {
+                for (let i = 0; i < retries; i++) {
+                    try {
+                        const res = await fetch(url, options);
+                        if (res.ok) return await res.json();
+                    } catch (err) {
+                        if (i === retries - 1) throw err;
+                    }
+                    await new Promise(r => setTimeout(r, backoff * Math.pow(2, i)));
+                }
+            };
+
+            try {
+                const data = await retryFetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                });
+
+                const result = data.candidates?.[0]?.content?.parts?.[0]?.text || "Error processing algorithmic logic.";
+                output.innerHTML = `<div class="text-blue-400 font-bold mb-2">RESULT (${lang.toUpperCase()}):</div><div class="text-white">${result}</div>`;
+            } catch (err) {
+                output.innerHTML += `<div class="text-red-500">>> Critical failure: ${err.message}</div>`;
+            }
+            output.scrollTop = output.scrollHeight;
+        }
+
+        // Attach listeners
+        document.getElementById('genEn').addEventListener('click', () => processAlgorithm('en'));
+        document.getElementById('genFr').addEventListener('click', () => processAlgorithm('fr'));
+        
+        document.getElementById('saveBtn').onclick = () => {
+            const state = {
+                timestamp: new Date().toISOString(),
+                key: LEET_KEY,
+                widgets: Array.from(document.querySelectorAll('.widget .text-2xl')).map(el => el.innerText),
+                status: "Majestic Optimization Reformed"
+            };
+            document.getElementById('saveDataPreview').innerText = JSON.stringify(state, null, 2);
+            document.getElementById('modal').style.display = 'flex';
+        };
+
+        document.getElementById('closeModal').onclick = () => {
+            document.getElementById('modal').style.display = 'none';
+        };
+
+        window.onload = () => {
+            initWidgets();
+            setInterval(() => {
+                const widgets = document.querySelectorAll('.widget');
+                const randomIdx = Math.floor(Math.random() * widgets.length);
+                const newVal = Math.floor(Math.random() * 100);
+                const w = widgets[randomIdx];
+                if(w) {
+                    w.querySelector('.text-2xl').innerText = newVal + '%';
+                    w.querySelector('.h-full').style.width = newVal + '%';
+                }
+            }, 3000);
+        };
+    </script>
+</body>
+</html>
