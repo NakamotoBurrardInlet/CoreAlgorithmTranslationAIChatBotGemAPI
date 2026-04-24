@@ -10,7 +10,7 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0a0a0c;
+            background-color: #050507;
             color: #e2e8f0;
             overflow-x: hidden;
         }
@@ -23,216 +23,302 @@
         }
 
         .widget {
-            background: rgba(30, 30, 35, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(15, 15, 20, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 12px;
             padding: 1rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(12px);
         }
 
         .widget:hover {
-            transform: translateY(-5px);
-            border-color: #3b82f6;
-            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+            transform: scale(1.02);
+            border-color: #6366f1;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.15);
         }
 
         .leetspeak-key {
             font-family: 'JetBrains Mono', monospace;
             word-break: break-all;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            background: linear-gradient(135deg, #818cf8, #c084fc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-weight: 800;
         }
 
         .status-pulse {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             background: #10b981;
             border-radius: 50%;
             display: inline-block;
-            margin-right: 8px;
+            margin-right: 10px;
             animation: pulse 2s infinite;
+            box-shadow: 0 0 10px #10b981;
         }
 
         @keyframes pulse {
             0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(1.2); }
+            50% { opacity: 0.4; transform: scale(1.3); }
             100% { opacity: 1; transform: scale(1); }
         }
 
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #0a0a0c; }
-        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
+        .output-panel {
+            background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.05), transparent);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #050507; }
+        ::-webkit-scrollbar-thumb { background: #6366f1; border-radius: 10px; }
+
+        .glitch-text {
+            animation: glitch 5s infinite;
+        }
+        @keyframes glitch {
+            0% { text-shadow: 0 0 0 transparent; }
+            1% { text-shadow: 2px 0 red, -2px 0 blue; }
+            2% { text-shadow: 0 0 0 transparent; }
+        }
     </style>
 </head>
-<body class="min-h-screen">
+<body class="min-h-screen selection:bg-indigo-500/30">
 
-    <header class="p-6 border-b border-white/10 flex flex-col md:flex-row justify-between items-center bg-black/40 sticky top-0 z-50">
-        <div>
-            <h1 class="text-3xl font-extrabold tracking-tighter">ALGORITHMIC <span class="text-blue-500">CORE</span></h1>
-            <p class="text-xs text-slate-400 mt-1 uppercase tracking-widest">Scientific Logic & Traffic Exposure Interface</p>
-        </div>
-        <div class="mt-4 md:mt-0 flex items-center space-x-4">
-            <div id="auth-status" class="text-xs text-slate-300 font-mono">
-                <span class="status-pulse"></span> SYSTEM READY
+    <header class="p-6 border-b border-white/5 flex flex-col md:flex-row justify-between items-center bg-black/60 backdrop-blur-md sticky top-0 z-50">
+        <div class="flex items-center space-x-4">
+            <div class="h-10 w-10 bg-gradient-to-tr from-indigo-600 to-purple-600 rounded-lg flex items-center justify-center font-black text-white shadow-lg shadow-indigo-500/20">A</div>
+            <div>
+                <h1 class="text-2xl font-black tracking-tighter leading-none">ALGORITHMIC <span class="text-indigo-400">CORE</span></h1>
+                <p class="text-[10px] text-slate-500 mt-1 uppercase tracking-[0.3em] font-semibold">Magnitude Enhancement & Ethical Solutions</p>
             </div>
-            <button id="saveBtn" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-bold transition-all">
-                SAVE SESSION
+        </div>
+        <div class="mt-4 md:mt-0 flex items-center space-x-6">
+            <div id="auth-status" class="text-[10px] text-slate-400 font-mono flex items-center bg-white/5 px-3 py-1 rounded-full border border-white/10">
+                <span class="status-pulse"></span> SYSTEM_LIVE: OPTIMIZED
+            </div>
+            <button id="saveBtn" class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-lg text-xs font-bold transition-all shadow-lg shadow-indigo-600/20 active:scale-95">
+                SAVE STATE
             </button>
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto">
+        <!-- Algorithmic Entrance & API Route -->
         <section class="p-6">
-            <div class="bg-gradient-to-br from-slate-900 to-black p-8 rounded-2xl border border-white/10 shadow-2xl mb-8">
-                <h2 class="text-xl font-bold mb-4">API KEY TRANSLATION & REFORMED CLARITY</h2>
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <div class="space-y-4">
-                        <label class="block text-sm font-medium text-slate-400">Current Algorithm Translation Key:</label>
-                        <div class="p-4 bg-black/50 border border-blue-500/30 rounded-xl leetspeak-key text-lg">
-                            T|-|e qµi©|( |oro|/|/n f*][ _||_|^^p$ *v€|Z onethree 1αz¥ d{[]}6§.
+            <div class="bg-gradient-to-br from-slate-900 to-black p-8 rounded-3xl border border-white/10 shadow-2xl mb-8 relative overflow-hidden">
+                <div class="absolute -top-24 -left-24 w-64 h-64 bg-indigo-600/10 rounded-full blur-[100px]"></div>
+                
+                <h2 class="text-xl font-bold mb-6 flex items-center space-x-2">
+                    <span class="w-2 h-2 bg-indigo-500 rounded-full"></span>
+                    <span>API PUBLIC GEM KEY ROUTING & TRANSLATION</span>
+                </h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-[10px] font-bold text-indigo-400 uppercase tracking-widest mb-2">Subjective Motion Key</label>
+                            <div class="p-5 bg-black/60 border border-indigo-500/20 rounded-2xl leetspeak-key text-lg leading-relaxed shadow-inner">
+                                T|-|e qµi©|( |oro|/|/n f*][ _||_|^^p$ *v€|Z onethree 1αz¥ d{[]}6§.
+                            </div>
                         </div>
-                        <textarea id="userInput" placeholder="Enter logic parameters or query for translation..." 
-                            class="w-full bg-slate-800/50 border border-white/10 rounded-xl p-4 focus:ring-2 focus:ring-blue-500 outline-none h-32 transition-all"></textarea>
                         
-                        <div class="flex gap-2">
-                            <button id="genEn" class="flex-1 bg-slate-700 hover:bg-slate-600 p-3 rounded-lg font-bold">GENERATE ENGLISH</button>
-                            <button id="genFr" class="flex-1 bg-slate-700 hover:bg-slate-600 p-3 rounded-lg font-bold">GÉNÉRER FRANÇAIS</button>
+                        <div class="relative">
+                            <label class="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Input Logic Stream</label>
+                            <textarea id="userInput" placeholder="Generate textual English/French response or algorithmic code block..." 
+                                class="w-full bg-slate-950 border border-white/10 rounded-2xl p-5 focus:ring-2 focus:ring-indigo-500 outline-none h-40 transition-all font-mono text-sm placeholder:text-slate-700"></textarea>
+                        </div>
+                        
+                        <div class="flex gap-3">
+                            <button id="genEn" class="group flex-1 bg-white/5 hover:bg-white/10 border border-white/10 p-4 rounded-xl font-bold text-xs tracking-widest transition-all flex items-center justify-center space-x-2">
+                                <span>GEN_EN</span>
+                                <span class="opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                            </button>
+                            <button id="genFr" class="group flex-1 bg-white/5 hover:bg-white/10 border border-white/10 p-4 rounded-xl font-bold text-xs tracking-widest transition-all flex items-center justify-center space-x-2">
+                                <span>GÉN_FR</span>
+                                <span class="opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                            </button>
                         </div>
                     </div>
                     
-                    <div class="bg-black/40 border border-white/5 rounded-xl p-6 relative overflow-hidden">
-                        <div class="absolute top-0 right-0 p-2 text-[10px] text-blue-500 font-mono">OUTPUT_STREAM</div>
-                        <div id="resultOutput" class="h-full font-mono text-sm space-y-2 overflow-y-auto max-h-60 text-emerald-400">
-                            [System initialized] Ready for subjective motion data...
+                    <div class="output-panel rounded-3xl p-8 relative flex flex-col h-[400px]">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-[10px] text-indigo-300 font-black tracking-widest uppercase">Ethical Output Portal</span>
+                            <div class="flex space-x-1">
+                                <div class="w-2 h-2 rounded-full bg-red-500/50"></div>
+                                <div class="w-2 h-2 rounded-full bg-yellow-500/50"></div>
+                                <div class="w-2 h-2 rounded-full bg-green-500/50"></div>
+                            </div>
+                        </div>
+                        <div id="resultOutput" class="flex-1 font-mono text-sm space-y-4 overflow-y-auto pr-2 text-slate-300 scroll-smooth">
+                            <div class="text-indigo-400/50 italic">[System initialization complete]</div>
+                            <div class="text-slate-500">>> Waiting for true-logic input to trigger dimensional response...</div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="px-6 pb-20">
-            <div class="flex justify-between items-end mb-6">
+        <!-- Dimensional Measurement Widgets -->
+        <section class="px-6 pb-24">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-10 space-y-4">
                 <div>
-                    <h3 class="text-2xl font-bold">Sectional Performance Widgets</h3>
-                    <p class="text-slate-500 text-sm">Full inspected volume of trafficking web exposure</p>
+                    <h3 class="text-3xl font-black tracking-tighter">TOUCHING MEASUREMENT</h3>
+                    <p class="text-slate-500 text-xs uppercase tracking-widest mt-1">High-Speed Performance Qualified Components</p>
                 </div>
-                <div class="text-right">
-                    <span class="text-3xl font-black text-white/10 uppercase">50 Components</span>
+                <div class="bg-indigo-600/10 px-4 py-2 rounded-lg border border-indigo-500/20">
+                    <span class="text-indigo-400 font-black text-xl">50_MODULAR_UNITS</span>
                 </div>
             </div>
             
-            <div id="widgetContainer" class="widget-grid"></div>
+            <div id="widgetContainer" class="widget-grid">
+                <!-- High Speed Generated Components -->
+            </div>
         </section>
     </main>
 
-    <div id="modal" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-[100] p-4">
-        <div class="bg-slate-900 border border-white/10 p-8 rounded-2xl max-w-md w-full shadow-2xl">
-            <h2 class="text-2xl font-bold mb-4">Export Data</h2>
-            <p class="text-slate-400 mb-6">The current algorithmic state has been formatted for material display and local communication.</p>
-            <div id="saveDataPreview" class="bg-black p-4 rounded-lg mb-6 font-mono text-xs text-blue-300 break-all h-32 overflow-y-auto"></div>
-            <button id="closeModal" class="w-full bg-blue-600 p-3 rounded-xl font-bold">CLOSE INTERFACE</button>
+    <!-- Save Logic Modal -->
+    <div id="modal" class="fixed inset-0 bg-black/90 hidden items-center justify-center z-[100] backdrop-blur-sm p-4">
+        <div class="bg-[#0c0c12] border border-white/10 p-10 rounded-[2rem] max-w-lg w-full shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+            <div class="h-12 w-12 bg-indigo-600/20 rounded-full flex items-center justify-center mb-6">
+                <svg class="w-6 h-6 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <h2 class="text-3xl font-black mb-2">Algorithm Export</h2>
+            <p class="text-slate-400 mb-8 text-sm leading-relaxed">The ethical solution of magnitude has been reformatted for local file communication and performance display.</p>
+            <div id="saveDataPreview" class="bg-black/50 border border-white/5 p-5 rounded-2xl mb-8 font-mono text-[10px] text-indigo-300/80 break-all h-48 overflow-y-auto leading-relaxed shadow-inner"></div>
+            <button id="closeModal" class="w-full bg-indigo-600 hover:bg-indigo-500 p-4 rounded-xl font-bold tracking-widest text-xs transition-all shadow-lg shadow-indigo-600/20">CLOSE_INTERFACE</button>
         </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        const apiKey = "";
+        const apiKey = ""; // Implicitly handled by execution env
         const LEET_KEY = "T|-|e qµi©|( |oro|/|/n f*][ _||_|^^p$ *v€|Z onethree 1αz¥ d{[]}6§.";
         
-        let db, auth;
+        let db, auth, user;
 
-        // Correctly handle initialization to avoid Script Errors caused by incorrect module usage
+        // Initialize Firebase with secure routing
         try {
             const firebaseConfig = JSON.parse(window.__firebase_config || '{}');
             if (firebaseConfig.apiKey) {
                 const app = initializeApp(firebaseConfig);
                 auth = getAuth(app);
                 db = getFirestore(app);
-                signInAnonymously(auth).catch(e => console.error("Auth failed", e));
+                onAuthStateChanged(auth, (u) => {
+                    user = u;
+                    if (!u) signInAnonymously(auth).catch(console.error);
+                });
             }
         } catch (e) {
-            console.warn("Firebase config not found, running in offline mode.");
+            console.warn("Algorithm operating in offline-optimized mode.");
         }
 
+        // 50 Components Generator - High Performance Build
         function initWidgets() {
             const container = document.getElementById('widgetContainer');
             container.innerHTML = '';
+            const fragment = document.createDocumentFragment();
+            
             for (let i = 1; i <= 50; i++) {
                 const val = Math.floor(Math.random() * 100);
                 const widget = document.createElement('div');
                 widget.className = 'widget flex flex-col justify-between';
                 widget.innerHTML = `
                     <div class="flex justify-between items-start">
-                        <span class="text-[10px] font-bold text-slate-500">UNIT_${i.toString().padStart(3, '0')}</span>
-                        <div class="h-2 w-2 rounded-full ${val > 50 ? 'bg-blue-500' : 'bg-slate-600'}"></div>
+                        <span class="text-[9px] font-black text-slate-600 tracking-tighter">SIG_CH_${i.toString().padStart(3, '0')}</span>
+                        <div class="h-1.5 w-1.5 rounded-full ${val > 70 ? 'bg-indigo-500 shadow-[0_0_5px_#6366f1]' : 'bg-slate-800'}"></div>
                     </div>
-                    <div class="mt-4">
-                        <div class="text-2xl font-black text-white">${val}%</div>
-                        <div class="w-full bg-white/5 h-1 mt-2 rounded-full overflow-hidden">
-                            <div class="h-full bg-blue-500 transition-all duration-1000" style="width: ${val}%"></div>
+                    <div class="my-3">
+                        <div class="text-xl font-black text-white tracking-tighter">${val}%</div>
+                        <div class="w-full bg-white/5 h-[3px] mt-2 rounded-full overflow-hidden">
+                            <div class="h-full bg-indigo-500 transition-all duration-[1500ms] ease-out" style="width: ${val}%"></div>
                         </div>
                     </div>
-                    <div class="mt-4 text-[9px] text-slate-400 uppercase tracking-tighter">
-                        Vol: ${(Math.random() * 10).toFixed(2)} TB/s
+                    <div class="text-[8px] text-slate-500 font-bold uppercase tracking-widest flex justify-between">
+                        <span>Flux</span>
+                        <span class="text-indigo-400/50">${(Math.random() * 100).toFixed(1)}ms</span>
                     </div>
                 `;
-                container.appendChild(widget);
+                fragment.appendChild(widget);
             }
+            container.appendChild(fragment);
         }
 
+        // API Connection with fixed routing and key translation
         async function processAlgorithm(lang) {
             const input = document.getElementById('userInput').value;
             const output = document.getElementById('resultOutput');
             
-            output.innerHTML += `<div class="text-slate-500">>> Initializing ${lang.toUpperCase()} request...</div>`;
+            const logId = Math.random().toString(36).substring(7);
+            output.innerHTML += `<div class="text-slate-500 border-l-2 border-indigo-500 pl-3 py-1 bg-white/5 rounded-r-md">
+                [${logId}] Initiating ${lang.toUpperCase()} Algorithmic Route...
+            </div>`;
             output.scrollTop = output.scrollHeight;
 
-            const prompt = `Act as a scientific logic processor. Key: "${LEET_KEY}". User Query: "${input || "Analyze environmental motion"}". Generate optimized ${lang === 'en' ? 'English' : 'French'} response.`;
+            const systemPrompt = `You are the Majestic Core Optimization Engine. 
+            Root Key Translation: "${LEET_KEY}".
+            Operational Mode: Ethical Solution Magnitude.
+            Task: Respond to input as "True as True". If input is code, generate a high-speed optimized block. If input is text, respond with scientific logic in ${lang === 'en' ? 'English' : 'French'}.
+            Reference "Touching Measurement" and "Dimensional Performance" in your response.`;
 
-            const retryFetch = async (url, options, retries = 5, backoff = 1000) => {
+            const retryFetch = async (url, payload, retries = 5) => {
                 for (let i = 0; i < retries; i++) {
                     try {
-                        const res = await fetch(url, options);
-                        if (res.ok) return await res.json();
+                        const res = await fetch(url, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+                        const data = await res.json();
+                        // Fixed: Correctly check for candidates in response structure
+                        if (data && data.candidates && data.candidates.length > 0) {
+                            return data;
+                        }
+                        throw new Error(data.error?.message || "Incomplete Response Chain");
                     } catch (err) {
                         if (i === retries - 1) throw err;
+                        await new Promise(r => setTimeout(r, 1000 * Math.pow(2, i)));
                     }
-                    await new Promise(r => setTimeout(r, backoff * Math.pow(2, i)));
                 }
             };
 
             try {
-                const data = await retryFetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+                const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+                const data = await retryFetch(endpoint, {
+                    contents: [{ parts: [{ text: input || "Initialize core pulse" }] }],
+                    systemInstruction: { parts: [{ text: systemPrompt }] }
                 });
 
-                const result = data.candidates?.[0]?.content?.parts?.[0]?.text || "Error processing algorithmic logic.";
-                output.innerHTML = `<div class="text-blue-400 font-bold mb-2">RESULT (${lang.toUpperCase()}):</div><div class="text-white">${result}</div>`;
+                const result = data.candidates[0].content.parts[0].text;
+                output.innerHTML += `
+                    <div class="bg-indigo-500/5 p-4 rounded-xl border border-indigo-500/10 mt-4">
+                        <div class="text-[10px] text-indigo-400 font-black mb-2 uppercase tracking-[0.2em]">Validated Output [${lang}]</div>
+                        <div class="text-white leading-relaxed text-sm">${result.replace(/\n/g, '<br>')}</div>
+                    </div>
+                `;
             } catch (err) {
-                output.innerHTML += `<div class="text-red-500">>> Critical failure: ${err.message}</div>`;
+                output.innerHTML += `<div class="text-red-500 p-3 bg-red-500/10 rounded-lg border border-red-500/20 text-xs mt-4">
+                    [ERROR] Chain Break: ${err.message}. Re-routing dimension...
+                </div>`;
             }
             output.scrollTop = output.scrollHeight;
         }
 
-        // Attach listeners
+        // High-Speed Listeners
         document.getElementById('genEn').addEventListener('click', () => processAlgorithm('en'));
         document.getElementById('genFr').addEventListener('click', () => processAlgorithm('fr'));
         
         document.getElementById('saveBtn').onclick = () => {
             const state = {
-                timestamp: new Date().toISOString(),
+                id: "CORE_MAGNITUDE_" + Date.now(),
                 key: LEET_KEY,
-                widgets: Array.from(document.querySelectorAll('.widget .text-2xl')).map(el => el.innerText),
-                status: "Majestic Optimization Reformed"
+                metrics: Array.from(document.querySelectorAll('.widget .text-xl')).map(el => el.innerText),
+                logic: "True-as-True",
+                status: "ETHICAL_PORTRAYAL_COMPLETE"
             };
-            document.getElementById('saveDataPreview').innerText = JSON.stringify(state, null, 2);
+            document.getElementById('saveDataPreview').innerText = JSON.stringify(state, null, 4);
             document.getElementById('modal').style.display = 'flex';
         };
 
@@ -240,18 +326,27 @@
             document.getElementById('modal').style.display = 'none';
         };
 
+        // Window Initialization
         window.onload = () => {
             initWidgets();
+            
+            // Subtle real-time oscillation of component data
             setInterval(() => {
                 const widgets = document.querySelectorAll('.widget');
-                const randomIdx = Math.floor(Math.random() * widgets.length);
-                const newVal = Math.floor(Math.random() * 100);
-                const w = widgets[randomIdx];
-                if(w) {
-                    w.querySelector('.text-2xl').innerText = newVal + '%';
-                    w.querySelector('.h-full').style.width = newVal + '%';
+                const count = Math.floor(Math.random() * 3) + 1;
+                for(let i=0; i<count; i++) {
+                    const idx = Math.floor(Math.random() * widgets.length);
+                    const newVal = Math.floor(Math.random() * 100);
+                    const w = widgets[idx];
+                    if(w) {
+                        const label = w.querySelector('.text-xl');
+                        const bar = w.querySelector('.h-full');
+                        label.innerText = newVal + '%';
+                        bar.style.width = newVal + '%';
+                        bar.style.backgroundColor = newVal > 80 ? '#818cf8' : '#6366f1';
+                    }
                 }
-            }, 3000);
+            }, 2000);
         };
     </script>
 </body>
